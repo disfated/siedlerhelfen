@@ -5,7 +5,7 @@
 </head>
 <body><h1><%= title %></h1>\
 <%= content %>\
-<hr><%= link_to 'index' => begin %>На глагне<% end %>\
+<hr><%= link_to 'index' => begin %>Назад<% end %>\
 </body>
 </html>
 
