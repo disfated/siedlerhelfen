@@ -1,0 +1,11 @@
+<!doctype html><html>
+<head><title><%= title %></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel='stylesheet' href='/static/reselect.css' type='text/css' />
+</head>
+<body><h1><%= title %></h1>\
+<%= content %>\
+<hr><%= link_to 'index' => begin %>На глагне<% end %>\
+</body>
+</html>
+

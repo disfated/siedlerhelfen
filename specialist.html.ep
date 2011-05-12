@@ -1,0 +1,37 @@
+% layout 'default';
+% title 'Siedlerhelfen::Specialists';
+% my $log = stash 'log';
+% if (defined $log) {
+<pre><%= $log %></pre><hr>
+% }
+<h2>Геологи</h2>
+<h3>Озадаченные</h3>
+% my $tasks = stash 'tasks';
+% if (@$tasks) {
+<ul>
+%   for (@$tasks) {
+<li><%= $_ %></li>
+%   }
+</ul>
+% } else {
+<p>нет</p>
+% }
+<h3>Озадачить</h3>
+% my $free = stash 'free';
+% if (defined $free) {
+<%= form_for 'specialist' => begin %>
+Что: <%= select_field deposit => [
+    [Камень => 'Stone'],
+    [Мрамор => 'Marble'],
+    [Медь => 'BronzeOre'],
+    [Железо => 'IronOre'],
+    [Уголь => 'Coal'],
+    [Золото => 'GoldOre']
+] %><br />
+<%= hidden_field id => $free %>
+<%= submit_button 'ИЩИ' %>
+<% end %>
+% } else {
+<p>Свободных нет</p>
+% }
+
