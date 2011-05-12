@@ -27,11 +27,12 @@
     [Железо => 'IronOre'],
     [Уголь => 'Coal'],
     [Золото => 'GoldOre']
-] %><br />
+] %>
 <%= hidden_field id => $free %>
 <%= submit_button 'ИЩИ' %>
 <% end %>
 % } else {
 <p>Свободных нет</p>
+<%= link_to url_for->query(abuse => 1) => begin %>Есть?<% end %>
 % }
 
