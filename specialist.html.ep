@@ -1,8 +1,7 @@
 % layout 'default';
 % title 'Siedlerhelfen::Specialists';
-% my $log = stash 'log';
-% if (defined $log) {
-<pre><%= $log %></pre><hr>
+% if (defined stash 'log') {
+<pre><%= stash 'log' %></pre><hr>
 % }
 <h2>Геологи</h2>
 <h3>Озадаченные</h3>
@@ -17,8 +16,7 @@
 <p>нет</p>
 % }
 <h3>Озадачить</h3>
-% my $free = stash 'free';
-% if (defined $free) {
+% if (defined stash 'free') {
 <%= form_for 'specialist' => begin %>
 Что: <%= select_field deposit => [
     [Камень => 'Stone'],
@@ -28,11 +26,10 @@
     [Уголь => 'Coal'],
     [Золото => 'GoldOre']
 ] %>
-<%= hidden_field id => $free %>
+<%= hidden_field id => stash('free') %>
 <%= submit_button 'ИЩИ' %>
 <% end %>
 % } else {
 <p>Свободных нет</p>
-<%= link_to url_for->query(abuse => 1) => begin %>Есть?<% end %>
 % }
 

@@ -2,7 +2,6 @@
 % title 'Siedlerhelfen::Proviant';
 <%= form_for proviant => begin %>
 <table border=0>
-% my $prod = stash 'prod';
 % for (keys %$prod){
 <tr><td><%= $prod->{$_} %></td><td><%= input_tag $_ => '0' %></td></tr>
 % }

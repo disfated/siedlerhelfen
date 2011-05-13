@@ -16,8 +16,7 @@ function expand(obj_id){
 <table border="1" cellspacing="1" cellpadding="5" width="100%">
 <col /><col /><col /><col /><col width="50%" />
 <tr><th>Время</th><th>Задание</th><th>Статус</th><th>Код ошибки</th><th>Лог</th></tr>
-% my @tasks = @{stash 'tasks'};
-% for (@tasks){
+% for (@$tasks){
 <tr><td><%= my $lt = localtime($_->{_id}->get_time) %></td><td><%= $_->{task} %></td>
 <td><%= $_->{status}.': '.$status{$_->{status}} %>
 % if ($_->{status} ne 'F'){ 

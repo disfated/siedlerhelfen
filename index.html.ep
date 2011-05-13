@@ -1,6 +1,5 @@
 % layout 'default';
 % title 'Siedlerhelfen';
-% my $news = stash 'news';
 Пользователь: <b><%= session 'name' %></b>
 <hr>
 <% if (my $message = flash 'message' ) { %>
