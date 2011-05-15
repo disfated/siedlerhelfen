@@ -1,0 +1,12 @@
+% layout 'default';
+% title 'Siedlerhelfen::Proviant';
+<%= form_for proviant => begin %>
+<table border=0>
+% for (keys %$prod){
+<tr><td><%= $prod->{$_} %></td><td><%= input_tag $_ => '0' %></td></tr>
+% }
+<tr><td><%= submit_button 'Запуск' %></td></rt>
+</table>
+<%= hidden_field prod => 1 %>
+<% end %>
+

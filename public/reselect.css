@@ -1,0 +1,9 @@
+.select-wrap { position:relative; display:inline-block; }
+.select-selected { cursor:pointer; min-width:200px; }
+.select-selected img { vertical-align:middle; display:inline-block; width:26px; height:25px; margin-right:5px; }
+.select-selected span { vertical-align:middle; padding-right:10px;}
+.select-pane { display: none; position:absolute; width:280px; background:#FFF; box-shadow:0 0 10px rgba(0,0,0,0.3); padding:2px; border:1px solid #CCC; border-radius:5px; z-index:100; }
+.select-pane > img { cursor:pointer; padding:6px; margin:2px; display:inline-block; width:26px; height:25px; background:#F1F1F1; border-radius:8px; }
+.select-pane > img:hover { background:#CCC; }
+.select-pane > hr { margin:0px 2px 4px; padding:0; border: 1px solid #DDD; }
+

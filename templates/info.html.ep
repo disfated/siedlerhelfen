@@ -1,0 +1,9 @@
+% layout 'default';
+% title 'Siedlerhelfen::Info';
+<h2>Список ресурсов</h2>
+<table border=0>
+% for (@$res){
+<tr><td><img src='/images/<%= lc ($_->[0]) %>.png' /></td><td><b><%= $_->[0] %></b></td><td><%= $_->[1] %></td></tr>
+% }
+</table>
+

@@ -1,0 +1,13 @@
+% layout 'default';
+% title 'Siedlerhelfen::Feed';
+<% unless ( param 'deposit' ) { %>
+<%= form_for feed => begin %>
+<%= radio_button deposit => 'Fish' %>Рыба<br>
+<%= radio_button deposit => 'Meat' %>Мясо<br>
+<%= submit_button 'ЖРАТ' %>
+<% end %>
+<% } %>
+<% if (my $result = stash 'result'){ %>
+<%= $result %>
+<% } %>
+
