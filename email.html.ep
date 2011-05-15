@@ -1,7 +1,0 @@
-% layout 'default';
-% title 'E-Mail';
-<%= form_for email => begin %>
-Мыло: <%= text_field 'email' %><br>
-<%= submit_button 'Задать' %>
-<% end %>
-

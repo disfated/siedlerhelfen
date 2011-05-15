@@ -1,5 +1,0 @@
-% layout 'default';
-% title 'Oops';
-<p>Случилось что-то плохое... Админ уже в курсе.</p>
-% mail(to => 'root', template => 'exception', format => 'mail');
-
