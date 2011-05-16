@@ -11,6 +11,6 @@
 <tr><td>Предложение:</td><td><%= text_field 'offer_c' => 200 %></td><td><%= select_field 'offer_s' => $res, id => 'offer_s' %></td></tr>
 <tr><td>Цена:</td><td><%= text_field 'cost_c' => 1 %></td><td><%= select_field 'cost_s' => $res, id => 'cost_s' %></td></tr>
 <tr><td><%= submit_button 'Барыжить' %></td></rt>
-</table
+</table>
 <% end %>
 
