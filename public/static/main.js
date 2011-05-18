@@ -47,14 +47,18 @@ var resources = {
 	'Cannon'         : { },
 };
 
-var id, res, tab = 1;
+var id, res, tab;
 for (id in resources) {
 	res = resources[id];
-	tab = res.tab || (res.tab = tab);
+	res.br = (tab && res.tab && res.tab !== tab);
+	tab = res.tab || (res.tab = tab || 1);
 	res.name || (res.name = id.replace(/([a-z])([A-Z]+)/g, function($0, $1, $2) { return $1 + ' ' + $2.toLowerCase() }));
 	res.icon = '/images/' + id.toLowerCase() + '.png';
 };
 
+Number.prototype.resources = function() {
+	return this.valueOf() < 1000 ? this.toString() : this.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, '.');
+};
 
 $.browser.storage = 'localStorage' in window && window['localStorage'] !== null;
 if ($.browser.storage) {
@@ -79,7 +83,7 @@ function resourceSelector(elems) {
 	
 	return $(elems).each(function() {
 		
-		var $select = $(this), $wrap, $icon, $name, $pane, tab;
+		var $select = $(this), $wrap, $icon, $name, $pane;
 		
 		var $wrap = $(
 			'<div class="select-wrap">' + 
@@ -96,10 +100,9 @@ function resourceSelector(elems) {
 		
 		// заполняем всплывающую панельку картинками ресурсов
 		$.each(resources, function(resourceId, resource) {
-			if (tab && resource.tab !== tab) {
+			if (resource.br) {
 				$pane.append('<hr>'); // разделяем ресурсы с разных табов
 			};
-			tab = resource.tab;
 			$('<img />').prop({
 				src: resource.icon,
 				title: resource.name
@@ -235,11 +238,124 @@ function tradeTemplates() {
 
 };
 
+
+// добавляет на все страницы кнопку показа текущих ресурсов в всплывающем окошке
+function globalMenu() {
+	
+	if (!$('body > h1').length) return;
+	return $('<div id="global-menu" />')
+		.append(resourcesLink())
+		.insertBefore('body > h1');
+	
+	function resourcesLink() {
+		
+		var $wrap = $(
+			'<span id="global-menu-resources" href="#">' +
+				'<a href="#resources">Ресурсы</a>' +
+				'<div class="res-info-pane">' +
+					'<div class="res-info-actions">' +
+						'<a href="#refresh">Обновить</a>' +
+					'</div>' +
+					'<ul class="res-info-res" />' +
+				'</div>' +
+			'</span>'
+		);
+		
+		var storeName = 'resourcesInfo';
+		var resourcesInfo = null;
+		var loading = false;
+		var $link = $wrap.find('a[href="#resources"]');
+		var $pane = $wrap.find('.res-info-pane');
+		var $info = $wrap.find('.res-info-res');
+		$link.click(function() {
+			$pane.fadeToggle(250);
+			return false;
+		});
+		$wrap.find('a[href="#refresh"]').click(function() {
+			!loading && updateResources();
+			return false;
+		});
+		getResources(false);
+		
+		return $wrap;
+		
+		function renderResources() {
+			if (resourcesInfo == null) {
+				$info.html('Нет данных');
+			} else {
+				var tab;
+				$info.html(
+					$.map(resources, function(resource, resourceId) {
+						if (!resourceId in resourcesInfo) return null;
+						return (resource.br ? '<hr>' : '') + '<li title="' + resource.name + '"><img src="' + resource.icon + '" /><span>' + resourcesInfo[resourceId].resources() + '</span></li>';
+					}).join('')
+				);
+			};
+		};
+		
+		function renderError(error) {
+			$info.html('Кто-то что-то напортачил...<br />' + String(error));
+		};
+		
+		function renderLoading() {
+			$info.html('<span class="loading"></span>');
+		};
+		
+		function getResources(force) {
+			
+			if ($.browser.storage) {
+				resourcesInfo = null;
+				var stored = $.storage.get(storeName);
+				if (stored) {
+					if (Date.now() - stored.date > 3600000) {
+						$.storage.rm(storeName);
+					} else {
+						resourcesInfo = stored.data;
+					};
+				};
+			};
+			if (resourcesInfo == null || force) {
+				updateResources();
+			} else {
+				renderResources();
+			};
+		};
+		
+		function updateResources() {
+			resourcesInfo == null;
+			$.getJSON('/siedler/info.json')
+				.success(function(data, status, request) {
+					if (data == null) {
+						renderError('Null data');
+					} else {
+						$.browser.storage && $.storage.set(storeName, {
+							date : Date.now(),
+							data : data
+						});
+						resourcesInfo = data;
+						renderResources();
+					};
+				})
+				.error(function(request, status, error) {
+					renderError(error);
+				})
+				.complete(function() {
+					loading = false;
+				});
+			loading = true;
+			renderLoading();
+		};
+	
+	};
+	
+};
+
 function ready() {
 	if (/\/trade(\?.+)?$/.test(window.location)) { // we better use <body id="trade-page"> or smth and test it instead
 		resourceSelector('#offer_s, #cost_s');
 		tradeTemplates();
 	};
+	globalMenu();
 };
 
 
