@@ -3,7 +3,7 @@
 % if (defined stash 'msg'){
 <%= stash 'msg' %><hr>
 % }
-<%= form_for trade => begin %>
+<%= form_for trade => (method => 'post') => begin %>
 <table border=0>
 <tr><td>Кому:</td><td><%= select_field 'recepient' => stash 'players' %></td></tr>
 <tr><td>Число предложений:</td><td><%= text_field 'tcount' => 1 %></td></tr>
