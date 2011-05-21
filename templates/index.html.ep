@@ -10,6 +10,7 @@
 <b><%= link_to queue => begin %>Очередь заданий<% end %></b><br>
 <%= link_to info => begin %>Ресурсы<% end %><br>
 <%= link_to feed => begin %>Кормить<% end %><br>
+<%= link_to drop => begin %>Дроп<% end %><br>
 <%= link_to build => begin %>Строить поля/колодцы<% end %><br>
 <%= link_to proviant => begin %>Провиант<% end %><br>
 <%= link_to trade => begin %>Торговать<% end %><br>

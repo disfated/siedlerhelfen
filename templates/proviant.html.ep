@@ -1,12 +1,21 @@
 % layout 'default';
 % title 'Siedlerhelfen::Proviant';
+<% my %icons = (
+        ProductivityBuffLvl1 => 'sushiplate.png',
+        ProductivityBuffLvl2 => 'buffcheesesandwich.png',
+        ProductivityBuffLvl3 => 'giftbasket.png',
+        FillDeposit_Fishfood => 'bufffishfood01.png',
+        FillDeposit_Hunter => 'meat.png',
+        AddResource_ConvertBeerToPopulation => 'settler.png',
+    );
+%>
 <%= form_for proviant => begin %>
 <table border=0>
 % for (keys %$prod){
-<tr><td><%= $prod->{$_} %></td><td><%= input_tag $_ => '0' %></td></tr>
+<tr><td><img src='/images/<%= $icons{$_}%>' /></td><td><%= $prod->{$_} %></td><td><%= input_tag $_ => '0' %></td></tr>
 % }
-<tr><td><%= submit_button 'Запуск' %></td></rt>
 </table>
 <%= hidden_field prod => 1 %>
+<%= submit_button 'Запуск' %>
 <% end %>
 
