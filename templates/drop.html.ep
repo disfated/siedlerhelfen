@@ -1,0 +1,15 @@
+% layout 'default';
+% title 'Siedlerhelfen::Drop';
+% if (my $drop = stash 'drop'){
+% if (@$drop) {
+%= form_for 'drop' => begin
+% for (@$drop) {
+%= check_box 'drop' => $_
+<%= $_ %><br />
+% }
+%= submit_button 'Дроп';
+% end
+% }
+% else {
+<p>Нечего дропать</p>
+% } }
