@@ -4,7 +4,7 @@
 % if (@$drop) {
 %= form_for 'drop' => begin
 % for (@$drop) {
-%= check_box 'drop' => $_
+%= check_box 'drop' => $_, checked => 1
 <%= $_ %><br />
 % }
 %= submit_button 'Дроп';
