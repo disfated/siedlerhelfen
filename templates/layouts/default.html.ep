@@ -1,15 +1,15 @@
 <!doctype html><html>
 <head><title><%= title %></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="https://github.com/disfated/siedlerhelfen-statics/raw/master/main.css" />
-<link rel="stylesheet" type="text/css" href="https://github.com/disfated/siedlerhelfen-statics/raw/master/aristo/aristo.min.css" />
+<link rel="stylesheet" type="text/css" href="https://raw.github.com/disfated/siedlerhelfen-statics/master/main.css" />
+<link rel="stylesheet" type="text/css" href="https://raw.github.com/disfated/siedlerhelfen-statics/master/aristo/aristo.min.css" />
 </head>
 <body><h1><%= title %></h1>\
 <%= content %>\
 <hr><%= link_to 'index' => begin %>Назад<% end %>\
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="https://github.com/disfated/siedlerhelfen-statics/raw/master/main.js"></script>
+<script type="text/javascript" src="https://raw.github.com/disfated/siedlerhelfen-statics/master/main.js"></script>
 </body>
 </html>
 
